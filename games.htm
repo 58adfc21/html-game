@@ -1,0 +1,112 @@
+<canvas id = 'game' width="1920" height="960"></canvas>
+<script>
+var canvas = document.getElementById('game');
+var set = canvas.getContext('2d');
+
+//Player Objects
+var plPos = (100, 100)
+var plHealth = 100;
+var plHeight = 50;
+var plWidth = 50;
+
+//movement stuff
+var x = 100;
+var y = 100;
+
+var left;
+var right;
+var up;
+var down;
+var jump;
+
+
+//Walls in arrays.
+var safeWall = [
+	[300, 300, 200, 200],
+	[350, 350, 200, 200],
+	[400, 400, 200, 200]
+	];
+var badWall= [
+	[500, 500, 200, 200],
+	[550, 550, 200, 200],
+	[600, 600, 200, 200]
+	];
+
+
+window.onload = function(){
+	var fps = 60;
+	
+	//document
+	setInterval((gameSettingLogic), 1000/fps);
+
+}
+
+function keyDown(evt){
+	document.eventViewer("keyDown", keyDown);
+	console.log("The value is ", evt.keyCode);
+
+	
+
+}
+//switch
+
+function gameSettingLogic(){
+	paintBackground();
+	playerObject();
+	gravity();
+	collisionObjects();
+}
+
+function gravity(){
+}
+
+function collisionObjects(){
+    normalWall();
+    deathWall();
+}
+
+function normalWall(){
+	set.fillStyle = '#000000';
+	for (var i = 0; i < safeWall.length; i++){
+		set.fillRect(safeWall[i][0], safeWall[i][1],safeWall[i][2],safeWall[i][3]);
+	}
+	
+}
+
+function deathWall(){
+	set.fillStyle = '#FF0000';
+	for (var i = 0; i < badWall.length; i++){
+		set.fillRect(badWall[i][0], badWall[i][1],badWall[i][2],badWall[i][3]);
+	}
+	
+}
+
+function playerObject(){
+	set.fillStyle = '#DEB887'
+	set.fillRect(x, y, plWidth, plHeight)
+}
+
+
+function paintBackground(){
+
+	
+	
+	set.fillStyle = '#ffb3ff';
+	set.fillRect(0, 0, canvas.width, canvas.height);
+	
+
+	/*set.fillStyle = 'red';
+	set.fillRect(x, 0, 50, 50);
+	x++;*/
+	
+	/*set.fillStyle = 'yellow';
+	set.fillRect(x, y, 50, 50);
+	x++;
+	y++;*/
+	
+}
+
+
+
+
+</script>
