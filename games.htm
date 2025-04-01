@@ -10,14 +10,19 @@ var plHeight = 50;
 var plWidth = 50;
 
 //movement stuff
+//movement stuff
 var x = 100;
 var y = 100;
 
-var left;
-var right;
-var up;
-var down;
-var jump;
+var pMoveVert = 0;
+var jumpAllowed = true;
+
+//Keybinding
+var left = false;
+var up = false;
+var right = false;
+var down = false;
+var jump = false;
 
 
 //Walls in arrays.
@@ -33,36 +38,81 @@ var badWall= [
 	];
 
 
+
 window.onload = function(){
-	var fps = 60;
+	//Sets the FPS, limited by hardware's refresh rate.
+	var fps = 144;
 	
-	//document
+	//tracks when keys are pressed up and pressed down.
+	document.addEventListener("keyup", keyup);
+	document.addEventListener("keydown", keydown);
+	
+	//Sets how many times per x milliseconds an update is triggered. Limited by Hardwares refresh rate.
 	setInterval((gameSettingLogic), 1000/fps);
 
 }
 
-function keyDown(evt){
-	document.eventViewer("keyDown", keyDown){
-		console.log("The value is ", evt.keyCode);
+function keydown(evt){
+	//console.log(evt.keyCode);
+	switch(evt.keyCode){
+	case 37: left = true; break;
+	case 38: up = true; break;
+	case 39: right = true; break;
+	case 40: down = true; break;
 	}
 	
 
 }
-//switch
+
+function keyup(evt){
+	//console.log(evt.keyCode);
+	switch(evt.keyCode){
+	case 37: left = false; break;
+	case 38: up = false; break;
+	case 39: right = false; break;
+	case 40: down = false; break;
+	}
+}
 
 function gameSettingLogic(){
 	paintBackground();
 	playerObject();
 	gravity();
 	collisionObjects();
-}
-
-function gravity(){
+	movement();
 }
 
 function collisionObjects(){
     normalWall();
     deathWall();
+}
+
+function movement(){
+
+	if (left){ 
+		x--;	
+	}
+	else if (right){
+		x++;
+	}
+	if (down){ 
+		y++;	
+	}
+	else if (up){
+		y--;
+	}
+}
+
+function gravity(){
+	y += pMoveVert;
+	pMoveVert += 0.001; 
+}
+
+
+
+function checkIntersectRect(r11, r1u, r1r, r1d, r21, r2u, r2r, r2d){
+	return !(r21 > r1r || r2r < r11 ||r2u > r1d || r2d < r1u );
+		
 }
 
 function normalWall(){
