@@ -10,7 +10,7 @@
 
 ## Credits
 
-<p>This is a program mostly built by myself, based on [Not The Future's](https://www.youtube.com/@notthefuture1881) tutorial [how 2 code game](https://www.youtube.com/watch?v=-_TmEiG9ynY&t=0s).</p>
+<p>This is a program mostly built by myself, based on (Not The Future's)[https://www.youtube.com/@notthefuture1881] tutorial (how 2 code game)[https://www.youtube.com/watch?v=-_TmEiG9ynY&t=0s].</p>
 
 
 
