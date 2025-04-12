@@ -3,6 +3,7 @@
 <script>
 var canvas = document.getElementById('game');
 var set = canvas.getContext('2d');
+var text =  canvas.getContext('2d')
 
 //Player Objects
 var plPos = (100, 100)
@@ -90,6 +91,7 @@ function keyup(evt){
 
 function gameSettingLogic(){
 	paintBackground();
+	textBackground();
 	playerObject();
 	collisionObjects();
 	gravity();
@@ -228,6 +230,13 @@ function paintBackground(){
 	set.fillRect(x, y, 50, 50);
 	x++;
 	y++;*/
+	
+}
+
+function textBackground(){
+	text.font = '30px Georgia';
+	text.fillStyle = '#000000';
+	text.fillText("", 860, 50);
 	
 }
 
