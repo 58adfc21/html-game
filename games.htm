@@ -1,3 +1,4 @@
+<body>
 <canvas id = 'game' width="1920" height="960"></canvas>
 <script>
 var canvas = document.getElementById('game');
@@ -6,13 +7,13 @@ var set = canvas.getContext('2d');
 //Player Objects
 var plPos = (100, 100)
 var plHealth = 75;
-var plHeight = 75;
-var plWidth = 75;
+var plHeight = 50;
+var plWidth = 50;
 
 //movement stuff
 //movement stuff
 var x = 100;
-var y = 100;
+var y = 549;
 
 var pJump = 0;
 var jumpAllowed = false;
@@ -27,21 +28,28 @@ var jump = false;
 
 
 //Walls in arrays.
+// position of X, position of Y, width, height
 var safeWall = [
-	[300, 200, 200, 100],
-	[200, 850, 500, 50],
-	[200, 400, 100, 200],
-	[300, 400, 400, 300],
-	[1000, 300, 500, 100]
+	[50, 600, 200, 50],
+	[276, 425, 50, 150],
+	[420, 625, 150, 25],
+	[550, 525, 150, 15],
+	[750, 325, 25, 300],
+	[550, 450, 30, 30],
+	[120, 425, 50, 50],
 	];
 var badWall= [
-	[500, 500, 200, 200],
-	[550, 550, 200, 200],
-	[600, 600, 200, 200],
-	/*[700, 400, 100, 100]*/
+	
+	[30, 450, 50, 50],
+	[370, 450, 150, 25],
+	[550, 525, 150, 15],
+
 	];
 
-
+	/*[500, 500, 200, 200],
+	[550, 550, 200, 200],
+	[600, 600, 200, 200],
+	[700, 400, 100, 100]*/
 
 window.onload = function(){
 	//Sets the FPS, limited by hardware's refresh rate.
@@ -104,12 +112,12 @@ function movement(){
 		x += pSpeed;
 	
 	if (jump && jumpAllowed){
-		pVertDown = -4;
+		pVertDown = -2.5;
 		jumpAllowed = false;
 	}
 	
-	if (!jump && pVertDown < -2){
-		pVertDown += 2;
+	if (!jump && pVertDown < -4){
+		pVertDown += 4;
 	}
 	/*if(!jump && jumpAllowed)
 		y -= 1;*/
@@ -176,8 +184,11 @@ function gravity(){
 
 function normalWall(){
 	set.fillStyle = '#000000';
+	set.strokeStyle = '#2EE63A';
+	set.lineWidth = 2;
 	for (var i = 0; i < safeWall.length; i++){
 		set.fillRect(safeWall[i][0], safeWall[i][1],safeWall[i][2],safeWall[i][3]);
+		set.strokeRect(safeWall[i][0], safeWall[i][1],safeWall[i][2],safeWall[i][3]);
 	}
 	
 }
@@ -191,15 +202,19 @@ function deathWall(){
 }
 
 function playerObject(){
-	set.fillStyle = '#DEB887'
-	set.fillRect(x, y, plWidth, plHeight)
+	set.fillStyle = '#DEB887';
+	set.fillRect(x, y, plWidth, plHeight);
 }
 
+function gameAllowedArea(){
+	var bottom =  set.canvas.height;
+		
+}
 
 function paintBackground(){
 
 
-	set.fillStyle = '#ffb3ff';
+	set.fillStyle = '#4949EB';
 	set.fillRect(0, 0, canvas.width, canvas.height);
 	
 	/*set.fillStyle = '#DEB887'
@@ -220,3 +235,4 @@ function paintBackground(){
 
 
 </script>
+</body>
